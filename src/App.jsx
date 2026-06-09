@@ -3,7 +3,7 @@ import { QueryClientProvider } from '@tanstack/react-query'
 import { queryClientInstance } from '@/lib/queryClient'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { GameProvider } from '@/lib/gameContext';
-import GameRoot from '@/components/Game/GameRoot';
+import GameRoot from '@/components/game/GameRoot';
 
 function App() {
   return (
