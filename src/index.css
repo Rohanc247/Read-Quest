@@ -1,0 +1,193 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Nunito:wght@400;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 15% 9%;
+    --foreground: 60 20% 90%;
+    --card: 220 14% 12%;
+    --card-foreground: 60 20% 90%;
+    --popover: 220 14% 12%;
+    --popover-foreground: 60 20% 90%;
+    --primary: 48 95% 58%;
+    --primary-foreground: 220 15% 9%;
+    --secondary: 270 55% 60%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 220 12% 17%;
+    --muted-foreground: 220 8% 52%;
+    --accent: 145 65% 42%;
+    --accent-foreground: 220 15% 9%;
+    --destructive: 0 72% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 12% 22%;
+    --input: 220 12% 17%;
+    --ring: 48 95% 58%;
+    --radius: 0px;
+    --forest: 130 60% 35%;
+    --ocean: 200 80% 45%;
+    --ice: 195 70% 75%;
+    --desert: 35 90% 55%;
+    --mountain: 20 40% 45%;
+    --underground: 270 50% 30%;
+    --drylands: 25 60% 40%;
+    --fire: 15 100% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Nunito', sans-serif;
+    image-rendering: pixelated;
+  }
+  h1, h2, h3 {
+    font-family: 'Press Start 2P', monospace;
+    line-height: 1.5;
+  }
+}
+
+@layer utilities {
+  .font-game {
+    font-family: 'Press Start 2P', monospace;
+  }
+  .font-vt {
+    font-family: 'VT323', monospace;
+    font-size: 1.35em;
+  }
+  .font-body {
+    font-family: 'Nunito', sans-serif;
+  }
+
+  /* Hard pixel border — no gradients, no blur */
+  .panel {
+    background: hsl(var(--card));
+    border: 2px solid hsl(var(--border));
+    box-shadow: 4px 4px 0px rgba(0,0,0,0.6);
+  }
+  .panel-inset {
+    background: hsl(var(--muted));
+    border: 2px solid hsl(var(--border));
+    box-shadow: inset 2px 2px 0px rgba(0,0,0,0.4);
+  }
+
+  /* Chunky button with hard offset shadow */
+  .btn-pixel {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.7rem;
+    line-height: 1.6;
+    padding: 10px 20px;
+    border: 2px solid rgba(0,0,0,0.5);
+    cursor: pointer;
+    position: relative;
+    transition: transform 80ms, box-shadow 80ms;
+    box-shadow: 3px 3px 0px rgba(0,0,0,0.55);
+    letter-spacing: 0.04em;
+  }
+  .btn-pixel:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0px rgba(0,0,0,0.55);
+  }
+  .btn-pixel:active {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0px rgba(0,0,0,0.55);
+  }
+  .btn-pixel-lg {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    padding: 14px 28px;
+    border: 2px solid rgba(0,0,0,0.5);
+    cursor: pointer;
+    position: relative;
+    transition: transform 80ms, box-shadow 80ms;
+    box-shadow: 4px 4px 0px rgba(0,0,0,0.6);
+    letter-spacing: 0.04em;
+  }
+  .btn-pixel-lg:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px rgba(0,0,0,0.6);
+  }
+  .btn-pixel-lg:active {
+    transform: translate(3px, 3px);
+    box-shadow: 1px 1px 0px rgba(0,0,0,0.6);
+  }
+
+  /* Scanline overlay for that CRT feel */
+  .scanlines::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,0.03) 2px,
+      rgba(0,0,0,0.03) 4px
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Pixel progress bar */
+  .pixel-bar {
+    height: 8px;
+    background: hsl(var(--muted));
+    border: 2px solid hsl(var(--border));
+    overflow: visible;
+    position: relative;
+  }
+  .pixel-bar-fill {
+    height: 100%;
+    transition: width 0.4s steps(10, end);
+  }
+
+  /* Dot grid background */
+  .dot-bg {
+    background-color: hsl(var(--background));
+    background-image: radial-gradient(circle, hsl(220 12% 22%) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  /* Glow colors — kept but much more subtle */
+  .glow-gold { box-shadow: 3px 3px 0px rgba(0,0,0,0.5), 0 0 12px rgba(255,200,0,0.15); }
+  .glow-green { box-shadow: 3px 3px 0px rgba(0,0,0,0.5); }
+  .glow-blue  { box-shadow: 3px 3px 0px rgba(0,0,0,0.5); }
+  .glow-red   { box-shadow: 3px 3px 0px rgba(0,0,0,0.5); }
+
+  /* Float animation — kept slow & subtle */
+  @keyframes pixelfloat {
+    0%, 100% { transform: translateY(0px); }
+    50%       { transform: translateY(-6px); }
+  }
+  .animate-float { animation: pixelfloat 3.5s ease-in-out infinite; }
+
+  @keyframes pulse-glow {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.6; }
+  }
+  .animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+
+  @keyframes bounce-in {
+    0%   { transform: scale(0.6); opacity: 0; }
+    70%  { transform: scale(1.08); }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  .animate-bounce-in { animation: bounce-in 0.4s ease-out; }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25%       { transform: translateX(-6px); }
+    75%       { transform: translateX(6px); }
+  }
+  .animate-shake { animation: shake 0.35s ease-in-out; }
+
+  /* Legacy compat */
+  .card-game { @apply panel; border-radius: 0; }
+  .btn-game  { @apply btn-pixel; }
+}
